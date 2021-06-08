@@ -11,7 +11,9 @@ Status = [[True,True,False,True,True,True,True,True,False],
           [False,False,False,False,False,False,False,True,False],
           [False,False,False,False,False,False,False,False,False],
           [True,True,True,True,True,True,True,True,True],
-          [True,True,True,True,True,True,True,True,False]]
+          [True,True,True,True,True,True,True,True,False],
+          [True,True,False,True,True,False,False,True],
+          [True,True,False,False,True,False,True,True,True]]
 
 def main():
     instructions = ""
@@ -28,10 +30,10 @@ def main():
     print(WindowSpecs)
 
 def findBestWindow(statArr):
-    BestStart = -1;
-    BestEnd   = -1;
-    CurrStart = -1;
-    CurrEnd   = -1;
+    BestStart = -1
+    BestEnd   = -1
+    CurrStart = -1
+    CurrEnd   = -1
     BestWindowSpecs = [-1,-1]
 
     for phi in range(len(statArr)):
@@ -56,6 +58,11 @@ def findBestWindow(statArr):
             CurrEnd = -1
 
     # Checks if no "Bad" phases were detected, sets Best window as full range
+    if(CurrEnd!=-1 and CurrStart !=-1):
+        if((BestEnd-BestStart)<(CurrEnd-CurrStart)):
+            BestStart = CurrStart
+            BestEnd   = CurrEnd
+   
     if((BestStart == -1) & (CurrStart != -1)):
         BestStart = CurrStart
         BestEnd = CurrEnd
